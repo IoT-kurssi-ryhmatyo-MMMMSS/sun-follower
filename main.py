@@ -1,10 +1,15 @@
-from machine import ADC, Pin, PWM
+from machine import ADC, Pin, PWM, I2C
+from pico_i2c_lcd import I2cLcd
 from utime import sleep
 from math import exp
 
 sleep(0.1)  # Wait for USB to become ready
 
 led = Pin("LED", Pin.OUT)  # Create LED pin object
+
+
+i2c = I2C(0, scl=Pin(1), sda=Pin(0), freq=400000)
+lcd = I2cLcd(i2c, 0x27, 4, 20)
 
 led.on()  # Turn LED on
 led.off()  # Turn LED off
@@ -59,6 +64,13 @@ while True:
 
     angle = max(0, min(180, angle))
     set_angle(angle)
+
+    lcd.clear()
+    lcd.putstr(f"{voltage1:.3f} {lux1:.0f} | {voltage0:.3f} {lux0:.0f}")
+    # lcd.putstr("    Left | Right \n")
+    # lcd.putstr("  Sensor | Sensor\n")
+    # lcd.putstr("Lx  120  |  23   \n")
+    # lcd.putstr("V  1.71  |  0.34 \n")
 
     print(f"{voltage1:.3f}, {lux1:.0f} | {voltage0:.3f}, {lux0:.0f}")
 

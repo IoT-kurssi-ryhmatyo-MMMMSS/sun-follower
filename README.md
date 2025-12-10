@@ -4,7 +4,7 @@
 This project implements a dual LDR light tracker using a Raspberry Pi Pico 2 W and a servo motor.
 The program continuously reads two light sensors (LDRs) through the ADC, calculates light intensity using an exponential calibration model, and adjusts the servo angle to point toward the brighter source.
 
-<img src="./images/project.JPG" width="560" alt="Project">
+<img src="./images/project.jpg" width="560" alt="Project">
 
 
 Features:
